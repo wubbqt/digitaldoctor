@@ -10,5 +10,6 @@
     "html.format.indentHandlebars": true,
     "html.format.endWithNewline": true,
     "html.format.indentInnerHtml": true,
-    "prettier.tabWidth": 4
+    "prettier.tabWidth": 4,
+    "git.ignoreLimitWarning": true
 }

@@ -1,33 +1,83 @@
-const express = require('express');
-// const connectDB = require('./config/db');
-const path = require('path');
-var db = require('./models');
+const express = require("express");
+const path = require("path");
+const mongoose = require("mongoose");
+const bodyParser = require("body-parser");
+const routes = require("./routes");
+const User = require("./models/User");
 
+const PORT = process.env.PORT || 3001;
 const app = express();
 
-// Connect Database
-// connectDB();
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
 
-//Init Middleware
-app.use(express.json({ extended: false }));
+const db = require("./models");
 
-// Define Routes
-app.use('/api/users', require('./routes/users'));
-app.use('/api/auth', require('./routes/auth'));
-app.use('/api/contacts', require('./routes/contacts'));
-
-//Server static assets in production
-if (process.env.NODE_ENV === 'production') {
-    // Set static folder
-    app.use(express.static('client/build'));
-
-    app.get('*', (req, res) =>
-        res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
-    );
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
 }
 
-const PORT = process.env.PORT || 5000;
+app.get("/user", function(req, res) {
+    db.User.find({})
+        .then(function(dbUser) {
+            res.json(dbUser);
+        })
+        .catch(function(err) {
+            res.json(err);
+        });
+});
 
-db.sequelize.sync().then(function() {
-    app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+app.post("/submit", function(req, res) {
+    db.healthLog
+        .create(req.body)
+        .then(function(dbHealthLog) {
+            return db.User.findOneAndUpdate(
+                {},
+                { $push: { notes: dbHealthLog._id } },
+                { new: true }
+            );
+        })
+        .then(function(dbUser) {
+            res.json(dbUser);
+        })
+        .catch(function(err) {
+            res.json(err);
+        });
+});
+
+app.get("/populateduser", function(req, res) {
+    db.User.find({})
+        .populate("healthLog")
+        .then(function(dbUser) {
+            res.json(dbUser);
+        })
+        .catch(function(err) {
+            res.json(err);
+        });
+});
+
+mongoose.connect(
+    process.env.MONGODB_URI || "mongodb://localhost/reacthealthtracker"
+);
+
+let MONGODB_URI =
+    process.env.MONGODB_URI || "mongodb://localhost/reacthealthtracker";
+
+mongoose.Promise = Promise;
+mongoose.connect(MONGODB_URI, {
+    useMongoClient: true
+});
+
+const configurePassport = require("./controllers/passport");
+
+const passport = configurePassport(app, mongoose, User);
+
+app.use(routes(passport, User));
+
+app.get("*", function(req, res) {
+    res.sendFile(path.join(__dirname, "./client/build/index.html"));
+});
+
+app.listen(PORT, () => {
+    console.log(`🌎 ==> Server now on port ${PORT}!`);
 });
