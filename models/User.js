@@ -1,33 +1,89 @@
-module.exports = function(sequelize, DataTypes) {
-    var Users = sequelize.define('User', {
-        name: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [1]
-            }
-        },
-        email: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                isEmail: true
-            }
-        },
-        password: {
-            type: DataTypes.STRING,
-            allowNull: false,
-            validate: {
-                len: [6]
-            }
-        }
-    });
+const mongoose= require ('mongoose');
+const Schema = mongoose.Schema;
 
-    Users.associate = function(models) {
-        Users.hasMany(models.Contacts, {
-            onDelete: 'cascade'
-        });
-    };
+const UserSchema = new Schema({
+  firstname: {
+    type: String,
+    trim: true,
+  },
+  lastname: {
+    type: String,
+    trim: true,
+  },
 
-    return Users;
-};
+  username: {
+    type: String,
+    trim: true,
+    unique: true,
+    required: 'Username is Required',
+  },
+
+  password: {
+    type: String,
+    trim: true,
+    required: 'Password is Required',
+    validate: [
+      function (input) {
+        return input.length >= 6;
+      },
+      'Password should be longer.',
+    ],
+  },
+
+  email: {
+    type: String,
+    unique: true,
+    match: [/.+@.+\..+/, 'Please enter a valid e-mail address'],
+  },
+
+  userCreated: {
+    type: Date,
+    default: Date.now,
+  },
+
+  doctors: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Doctor',
+    },
+  ],
+
+  clinics: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Clinic',
+    },
+  ],
+
+  healthLogs: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'HealthLog',
+    },
+  ],
+ 
+  prescriptions: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Prescription',
+    },
+  ],
+
+  attachments: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Attachement',
+    },
+  ],
+
+  symptoms: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'Symptoms',
+    },
+  ],
+});
+
+const User = model('User', UserSchema);
+
+module.exports = User;

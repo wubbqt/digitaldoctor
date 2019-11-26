@@ -1,31 +1,54 @@
 {
-    "name": "contact-keeper",
-    "version": "1.0.0",
-    "description": "Contact manager app",
-    "main": "server.js",
-    "scripts": {
-        "start": "node server.js",
-        "server": "nodemon server.js",
-        "client": "npm start --prefix client",
-        "clientinstall": "npm install -- prefix client",
-        "dev": "concurrently \"npm run server\" \"npm run client\"",
-        "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
-    },
-    "keywords": [],
-    "author": "",
-    "license": "ISC",
-    "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "config": "^3.2.2",
-        "express": "^4.17.1",
-        "express-validator": "^6.1.1",
-        "jsonwebtoken": "^8.5.1",
-        "mongoose": "^5.6.7",
-        "mysql2": "^2.0.0",
-        "sequelize": "^5.21.2"
-    },
-    "devDependencies": {
-        "concurrently": "^4.1.1",
-        "nodemon": "^1.19.1"
-    }
+  "name": "digitaldoctor",
+  "version": "1.0.0",
+  "private": true,
+  "main": "server.js",
+  "dependencies": {
+    "@material-ui/icons": "^1.0.0",
+    "axios": "^0.18.0",
+    "body-parser": "^1.18.2",
+    "chartist": "^0.11.0",
+    "connect-mongo": "^2.0.1",
+    "express": "^4.15.4",
+    "express-session": "^1.15.6",
+    "fusioncharts": "^3.12.2",
+    "material-ui": "^1.0.0-beta.42",
+    "moment": "^2.22.1",
+    "mongoose": "^5.0.15",
+    "morgan": "^1.9.0",
+    "n": "^6.1.3",
+    "passport": "^0.4.0",
+    "passport-local": "^1.0.0",
+    "react": "^16.3.1",
+    "react-chartist": "^0.13.1",
+    "react-dom": "^16.3.1",
+    "react-drop-to-upload": "^1.0.1",
+    "react-fusioncharts": "^1.0.5",
+    "react-router": "^4.2.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "^1.1.4",
+    "rebass": "^2.0.0-0",
+    "yarn": "^1.6.0"
+  },
+  "scripts": {
+    "server": "node server.js",
+    "client": "node scripts/start-client.js",
+    "start": "concurrently \"nodemon server.js\" \"npm run client\"",
+    "build": "node scripts/build.js",
+    "seed": "node scripts/seedDB.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "installDeps": "yarn && cd client && yarn",
+    "prepare": "cd client && yarn install && yarn build"
+  },
+  "devDependencies": {
+    "concurrently": "^3.5.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb": "^16.1.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.7.0",
+    "nodemon": "^1.11.0"
+  },
+  "engines": {
+    "node": "12.13.0"
+  }
 }

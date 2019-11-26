@@ -1,69 +1,41 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { MuiThemeProvider, createMuiTheme } from "material-ui/styles";
+import "./App.css";
+import Footer from "./Components/Footer";
+import Home from "./containers/Home";
+import DoctorList from "./containers/DoctorsList";
+import Appointments from "./containers/Appointments";
+import MedLog from "./containers/MedLog";
+import Prescriptions from "./containers/Prescriptions";
+import Login from "./containers/Login";
+import Signup from "./containers/Signup";
+import NoMatch from "./containers/NoMatch";
 
-import Navbar from './components/layout/Navbar';
-import Home from './components/pages/Home';
-import About from './components/pages/About';
-import UserDetails from './components/pages/UserDetails';
-import Register from './components/auth/Register';
-import Login from './components/auth/Login';
-import Alerts from './components/layout/Alerts';
-import PrivateRoute from './components/routing/PrivateRoute';
+const theme = createMuiTheme({
+    palette: {
+        type: "light"
+    },
+    typography: {
+        fontSize: 18
+    }
+});
 
-import ContactState from './context/contact/ContactState';
-import AuthState from './context/auth/AuthState';
-import AlertState from './context/alert/AlertState';
-import setAuthToken from './utils/setAuthToken';
-import './App.css';
+class App extends Component {
+    state = {
+        currentlyLoggedInUser: null
+    };
+    setUser = userId => {
+        this.setState({ currentlyLoggedInUser: userId });
+    };
 
-if (localStorage.token) {
-    setAuthToken(localStorage.token);
+    render() {
+        return [
+            <MuiThemeProvider theme={theme}>
+
+            </MuiThemeProvider>
+        ];
+    }
 }
-
-const App = () => {
-    return (
-        <AuthState>
-            <ContactState>
-                <AlertState>
-                    <Router>
-                        <Fragment>
-                            <Navbar />
-                            <div className='container'>
-                                <Alerts />
-                                <Switch>
-                                    <PrivateRoute
-                                        exact
-                                        path='/'
-                                        component={Home}
-                                    />
-                                    <PrivateRoute
-                                        exact
-                                        path='/contact'
-                                        component={UserDetails}
-                                    />
-                                    <Route
-                                        exact
-                                        path='/about'
-                                        component={About}
-                                    />
-                                    <Route
-                                        exact
-                                        path='/register'
-                                        component={Register}
-                                    />
-                                    <Route
-                                        exact
-                                        path='/login'
-                                        component={Login}
-                                    />
-                                </Switch>
-                            </div>
-                        </Fragment>
-                    </Router>
-                </AlertState>
-            </ContactState>
-        </AuthState>
-    );
-};
 
 export default App;
