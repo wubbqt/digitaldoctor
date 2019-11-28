@@ -1,4 +1,5 @@
-const mongoose= require ('mongoose');
+const mongoose = require('mongoose');
+
 const Schema = mongoose.Schema;
 
 const UserSchema = new Schema({
@@ -17,7 +18,6 @@ const UserSchema = new Schema({
     unique: true,
     required: 'Username is Required',
   },
-
   password: {
     type: String,
     trim: true,
@@ -29,46 +29,40 @@ const UserSchema = new Schema({
       'Password should be longer.',
     ],
   },
-
   email: {
     type: String,
     unique: true,
     match: [/.+@.+\..+/, 'Please enter a valid e-mail address'],
   },
-
   userCreated: {
     type: Date,
     default: Date.now,
   },
-
   doctors: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Doctor',
     },
   ],
-
   clinics: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Clinic',
     },
   ],
-
   healthLogs: [
     {
       type: Schema.Types.ObjectId,
       ref: 'HealthLog',
     },
   ],
- 
+
   prescriptions: [
     {
       type: Schema.Types.ObjectId,
       ref: 'Prescription',
     },
   ],
-
   attachments: [
     {
       type: Schema.Types.ObjectId,
@@ -84,6 +78,6 @@ const UserSchema = new Schema({
   ],
 });
 
-const User = model('User', UserSchema);
+const User = mongoose.model('User', UserSchema);
 
 module.exports = User;

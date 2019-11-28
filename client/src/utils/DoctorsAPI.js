@@ -1,3 +1,19 @@
-import axios from "axios";
+import axios from 'axios';
 
-// get, save, delete and update Doctors list in this file and export
+export default {
+  getDoctors() {
+    return axios.get('/api/doctors');
+  },
+  getDoctor(id) {
+    return axios.get('/api/doctors/' + id);
+  },
+  deleteDoctor(id) {
+    return axios.delete('/api/doctors/' + id);
+  },
+  saveDoctor(doctorData) {
+    return axios.post('/api/doctors/', doctorData);
+  },
+  updateDoctor(id) {
+    return axios.put('/api/doctors/' + id);
+  },
+};
