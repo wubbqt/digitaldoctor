@@ -1,6 +1,4 @@
-// Import React
 import React from 'react';
-// Import UI components and style from material-ui-next.
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
 import ExpansionPanel, {
@@ -10,7 +8,6 @@ import ExpansionPanel, {
 import List, { ListItem, ListItemText } from 'material-ui/List';
 import Button from 'material-ui/Button';
 
-// Style/Theme
 const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
@@ -36,8 +33,6 @@ const styles = theme => ({
     color: 'white',
   },
 });
-
-// Log List component on the My health log page.
 class LogList extends React.Component {
   render() {
     const { classes } = this.props;

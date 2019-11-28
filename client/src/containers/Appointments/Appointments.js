@@ -1,25 +1,18 @@
-// Importing React since we are using React.
 import React, { Component } from "react";
-// Importing the AppointmentsForm component.
 import AppointmentsForm from './AppointmentsForm';
-// Importing the AppointmentsList component.
 import AppointmentsList from './AppointmentsList';
-// Import API
 import AppointmentAPI from '../../utils/AppointmentAPI';
 import DoctorsAPI from '../../utils/DoctorsAPI';
 import ClinicsAPI from '../../utils/ClinicsAPI';
-// Import UI components from material-ui-next.
 import { withStyles } from 'material-ui/styles';
 import Table, { TableBody, TableCell, TableHead, TableRow } from 'material-ui/Table';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-// Import Sidebar component.
 import Sidebar from '../../Components/Sidebar';
-// Importing Navbar component.
 import NavBar from '../../Components/AppBar';
 
-//Style
+
 const styles = theme => ({
   root: theme.mixins.gutters({
     marginTop: theme.spacing.unit * 3,
@@ -78,14 +71,13 @@ class Appointments extends Component {
     formSuccessMessage: "",
 
   };
-  // When the component mounts, load all appointments and save them to this.state.appointments.
+
   componentDidMount() {
     this.loadAppointments();
     this.loadDoctors();
     this.loadClinics();
   }
 
-  // Loads all appointments and saves them to this.state.appointments.
   loadAppointments = () => {
     AppointmentAPI.getAppointments()
       .then(res =>
@@ -94,14 +86,12 @@ class Appointments extends Component {
       .catch(err => console.log(err));
   };
 
-  // Deletes an appointment from the database with a given id, then reloads appointments from the db
   deleteAppointment = id => {
     AppointmentAPI.deleteAppointment(id)
       .then(res => this.loadAppointments())
       .catch(err => console.log(err));
   };
 
-  //Loads all doctors and saves them to this.state.doctors.
   loadDoctors = () => {
     DoctorsAPI.getDoctors()
       .then(res =>
@@ -110,7 +100,6 @@ class Appointments extends Component {
       .catch(err => console.log('getting doctors did not work: ', err));
   };
 
-  //Loads all clinics and saves them to this.state.clinics.
   loadClinics = () => {
     ClinicsAPI.getClinics()
       .then(res =>
@@ -119,8 +108,6 @@ class Appointments extends Component {
       .catch(err => console.log('getting clinics did not work: ', err));
   };
 
-  // Keep track of what user enters for appointment name so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
   handleAppointmentNameChange = (event) => {
     this.setState({ 
       appointmentName: event.target.value,
@@ -129,8 +116,7 @@ class Appointments extends Component {
     });
   }
 
-  // Keep track of what user selects for doctor so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
+  
   handleAppointmentDoctorChange = (event) => {
     this.setState({ 
       appointmentDoctor: event.target.value,
@@ -139,8 +125,7 @@ class Appointments extends Component {
     });
   }
 
-  // Keep track of what user types into appointment date input field so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
+  
   handleAppointmentDateChange = (event) => {
     this.setState({ 
       appointmentDate: event.target.value,
@@ -149,8 +134,7 @@ class Appointments extends Component {
     });
   }
 
-  // Keep track of what user types into appointment time input field so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
+  
   handleAppointmentTimeChange = (event) => {
     this.setState({ 
       appointmentTime: event.target.value,
@@ -161,29 +145,24 @@ class Appointments extends Component {
 
   handleFormSubmit = event => {
     event.preventDefault();
-
-        // If appointment name field is empty when user submits form, show error.
     if (this.state.appointmentName === "") {
       this.setState({
         appointmentNameError: "Enter a name for the appointment."
       })
     }
 
-    // If the appointment doctor field is empty when user submits form, show error.
     if (this.state.appointmentDoctor === "") {
       this.setState({
         appointmentDoctorError: "Select the doctor associated with the appointment from the drop-down list."
       })
     }
 
-    // if the appointment date field is empty when user submits form, show error.
     if (this.state.appointmentDate === "" || this.state.appointmentDate === "mm/dd/yyyy") {
       this.setState({
         appointmentDateError: "Use the date picker to select the date of the appointment."
       })
     }
 
-    // if the appointment time field is empty when user submits form, show error.
     if (this.state.appointmentTime === "") {
       this.setState({
         appointmentTimeError: "Use the time picker to select the time of the appointment in HH:MM AM/PM format."
@@ -191,8 +170,6 @@ class Appointments extends Component {
     }
 
     else {
-      //Save appointment to database if all fields are filled out.
-      // Show form success message to user.
       AppointmentAPI.saveAppointment({
         appointmentName: this.state.appointmentName,
         doctor: this.state.appointmentDoctor,
@@ -207,7 +184,6 @@ class Appointments extends Component {
       });
 
       
-      // Clear form
       document.getElementById('appointment-form').reset();
     }
   };
@@ -292,6 +268,4 @@ class Appointments extends Component {
   }
 }
 
-// Exporting the Appointments component
-// so that the App.js file can use/render the Appointments page.
 export default withStyles(styles)(Appointments);

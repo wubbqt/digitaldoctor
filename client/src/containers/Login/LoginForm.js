@@ -1,6 +1,4 @@
-// Importing React since we are using React.
 import React from 'react';
-// Importing material-ui components and style.
 import Card, { CardContent } from 'material-ui/Card';
 import { withStyles } from 'material-ui/styles';
 import Typography from 'material-ui/Typography';
@@ -12,7 +10,6 @@ import InputAdornment from 'material-ui/Input/InputAdornment';
 import Input from 'material-ui/Input';
 import IconButton from 'material-ui/IconButton';
 
-// Style
 const styles = theme => ({
   textField: {
     marginTop: 60,
@@ -49,18 +46,15 @@ const styles = theme => ({
 });
 
 class LoginForm extends React.Component {
-  // State to toggle password visibility.
   state = {
     password: '',
     showPassword: false,
   };
 
-  // Toggle password visibility
   handleMouseDownPassword = event => {
     event.preventDefault();
   };
 
-  // Toggle password visiblity
   handleClickShowPassword = () => {
     this.setState({ showPassword: !this.state.showPassword });
   };
@@ -133,5 +127,4 @@ class LoginForm extends React.Component {
   }
 }
 
-// Export the LoginForm component with styling.
 export default withStyles(styles)(LoginForm);

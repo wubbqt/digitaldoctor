@@ -1,21 +1,12 @@
-// 404 Not found page
-// https://tylermcginnis.com/react-router-handling-404-pages/
-
-// Importing React since we are using React.
 import React, { Component } from 'react';
-// Importing Navbar component.
 import NavBar from '../../Components/AppBar';
-// Importing UI components and style from material-ui-next
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
 import { withStyles } from 'material-ui/styles';
 import Button from 'material-ui/Button';
-// import third-party routing library (react-router-dom)
 import { Link } from 'react-router-dom';
 
-// Styling
 const styles = {
-  // Tell Material-UI what's the font-size on the html element is.
   root: {
     flexGrow: 1,
   },
@@ -37,7 +28,6 @@ const styles = {
 
 };
 
-// 404 Not Found Page
 class NoMatch extends Component {
   render() {
     const { classes } = this.props;
@@ -72,6 +62,4 @@ class NoMatch extends Component {
   }
 }
 
-// Exporting the NoMatch component
-// so that the App.js file can render the Login page.
 export default withStyles(styles)(NoMatch);

@@ -1,19 +1,14 @@
-// Importing React since we are using React.
 import React, { Component } from 'react';
-// Importing UI components from rebass.
 import { Subhead, Link } from 'rebass';
-// Import UI components from material-ui-next.
 import { withStyles } from 'material-ui/styles';
 import Grid from 'material-ui/Grid';
 import Typography from 'material-ui/Typography';
-// Importing icons/images
 import report from '../../assets/images/medical_report.png';
 import journal from '../../assets/images/journal.png';
 import appointment from '../../assets/images/appointment.png';
 import prescription from '../../assets/images/prescription.png';
 import doctor from '../../assets/images/doctor.png';
 import chart from '../../assets/images/chart2.png';
-// Importing Navbar component.
 import NavBar from '../../Components/AppBar';
 
 const styles = {
@@ -127,5 +122,4 @@ class Home extends Component {
   }
 }
 
-// Exporting the Home component so that the App.js file can render the Home page.
 export default withStyles(styles)(Home);

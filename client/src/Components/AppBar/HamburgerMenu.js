@@ -1,14 +1,8 @@
-// Importing React since we are using React.
 import React from 'react';
-
-// Importing material-ui-next components
 import Menu, { MenuItem } from 'material-ui/Menu';
 import IconButton from 'material-ui/IconButton';
-// Hidden allows us to explicitly hide elements at certain breakpoints (xs, md, etc.) when we resize the browser window
-// or view the application on a mobile or tablet device.
 import Hidden from 'material-ui/Hidden';
 
-// Defining hamburger menu component, which is located in the top navigation bar.
 class HamburgerMenu extends React.Component {
     state = {
         anchorEl: null,
@@ -26,7 +20,6 @@ class HamburgerMenu extends React.Component {
         const { anchorEl } = this.state;
 
         return (
-            // Hide the hamburger menu on small screens and up.
             <Hidden smUp>
                 <div>
                     <IconButton
@@ -56,6 +49,5 @@ class HamburgerMenu extends React.Component {
     }
 }
 
-//Exporting the HamburgerMenu component so that it can be rendered in the top navigation bar component.
 export default HamburgerMenu;
 

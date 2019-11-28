@@ -1,6 +1,5 @@
 const db = require('../models');
 
-// Defining methods for the logsController
 module.exports = {
   findAll: function (req, res) {
       db.HealthLog
@@ -19,14 +18,13 @@ module.exports = {
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log('the findbyid healthlog is not working in logsController.js error: ' + err));
-    //res.status(422).json(err));
   },
   update: function (req, res) {
     db.HealthLog
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log('the update healthlog is not working in logsController.js error: ' + err));
-    //res.status(422).json(err));
+
   },
   remove: function (req, res) {
     db.HealthLog
@@ -34,6 +32,6 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log('the remove healthlog is not working in logsController.js error: ' + err));
-    //res.status(422).json(err));
+
   },
 };

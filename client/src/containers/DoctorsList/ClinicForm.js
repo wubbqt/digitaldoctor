@@ -1,6 +1,4 @@
-// Importing React since we are using React.
 import React from 'react';
-// Importing UI components from material-ui-next
 import Typography from 'material-ui/Typography';
 import Button from 'material-ui/Button';
 import TextField from 'material-ui/TextField';
@@ -10,12 +8,10 @@ import { InputLabel } from 'material-ui/Input';
 import { FormControl } from 'material-ui/Form';
 import { MenuItem } from 'material-ui/Menu';
 
-//Styling
 const styles = {
   textField: {
     marginTop: 50,
   },
-  // Tell Material-UI what's the font-size on the html element is.
   typography: {
     htmlFontSize: 40,
   },
@@ -46,7 +42,6 @@ const styles = {
 };
 
 class ClinicForm extends React.Component {
-  // Keep track of what user selects from clinic state drop down menu so that input can be grabbed later.
   handleStateSelectChange = event => {
     this.setState({
       [event.target.name]: event.target.value
@@ -227,5 +222,4 @@ class ClinicForm extends React.Component {
   }
 }
 
-// Export clinic form component with styling.
 export default withStyles(styles)(ClinicForm);

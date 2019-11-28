@@ -1,22 +1,13 @@
-// Importing React since we are using React.
 import React from 'react';
-// Importing AppBar
-// The app bar, formerly known as the action bar in Android,
-// is a special kind of toolbar that’s used for branding, navigation, search, and actions.
 import AppBar from 'material-ui/AppBar';
 import Toolbar from 'material-ui/Toolbar';
 import Button from 'material-ui/Button';
 import Typography from 'material-ui/Typography';
-// Importing material-ui-next styling.
 import { withStyles } from 'material-ui/styles';
-// Importing HamburgerMenu component.
 import HamburgerMenu from './HamburgerMenu';
-// import third-party routing library (react-router-dom)
 import { Link } from 'react-router-dom';
-// Import axios
 import axios from 'axios';
 
-// material-ui-next styling
 const styles = {
   root: {
     flexGrow: 1,
@@ -58,5 +49,4 @@ function NavBar(props) {
   );
 }
 
-// Exporting the NavBar component with styling.
 export default withStyles(styles)(NavBar);

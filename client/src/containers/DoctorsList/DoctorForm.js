@@ -1,6 +1,4 @@
-// Importing React since we are using React.
 import React, { Component } from 'react';
-// Importing UI components from material-ui-next
 import Typography from 'material-ui/Typography';
 import { MenuItem } from 'material-ui/Menu';
 import { FormControl } from 'material-ui/Form';
@@ -14,7 +12,6 @@ const styles = {
   textField: {
     marginTop: 50,
   },
-  // Tell Material-UI what's the font-size on the html element is.
   typography: {
     htmlFontSize: 40,
   },
@@ -49,7 +46,6 @@ class DoctorForm extends Component {
     this.setState({ [event.target.name]: event.target.value });
     event.preventDefault();
     this.props.handleDoctorClinicChange(event);
-    //need to make the selected item the first thing that shows on the list
   }
 
   state = {

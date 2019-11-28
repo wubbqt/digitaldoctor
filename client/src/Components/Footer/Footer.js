@@ -1,6 +1,4 @@
-// Importing React since we are using React.
 import React from 'react';
-// Importing UI components from material-ui-next.
 import { withStyles } from 'material-ui/styles';
 import Card, { CardContent } from 'material-ui/Card';
 import Typography from 'material-ui/Typography';
@@ -33,13 +31,10 @@ class Footer extends React.Component {
       <Card className="footer">
         <CardContent>
           <Typography gutterBottom variant="headline" component="h2" className={classes.footerContent}>
-            HealthTracker
+            DigitalDoctor
           </Typography>
           <Typography component="p" className={classes.footerContent}>
-            Created by Sara, Kayla, Jerridd, and Phil at the University of Minnesota
-          </Typography>
-          <Typography component="p" className={classes.copyright}>
-            Copyright &copy; 2018
+            ..
           </Typography>
         </CardContent>
       </Card>

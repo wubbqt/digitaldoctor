@@ -19,14 +19,12 @@ module.exports = {
       .findById(req.params.id)
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log('the findbyid attachment is not working in attachmentscontroller.js error: ' + err));
-    //res.status(422).json(err));
   },
   update: function(req, res) {
     db.Attachments
       .findOneAndUpdate({ _id: req.params.id }, req.body)
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log('the update attachment is not working in attachmentscontroller.js error: ' + err));
-    //res.status(422).json(err));
   },
   remove: function (req, res) {
     db.Attachments
@@ -34,6 +32,5 @@ module.exports = {
       .then(dbModel => dbModel.remove())
       .then(dbModel => res.json(dbModel))
       .catch(err => console.log('the remove attachment is not working in attachmentscontroller.js error: ' + err));
-    //res.status(422).json(err));
   },
 };

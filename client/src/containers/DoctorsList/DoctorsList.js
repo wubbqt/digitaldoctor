@@ -1,27 +1,17 @@
-// Importing React since we are using React.
 import React, { Component } from "react";
-// Importing Navbar component.
 import NavBar from '../../Components/AppBar';
-// Import DoctorForm
 import DoctorForm from './DoctorForm';
-// Import DoctorInfo
 import DoctorInfo from './DoctorInfo';
-// Import ClinicInfo
 import ClinicInfo from './ClinicInfo';
-// Import ClinicForm
 import ClinicForm from './ClinicForm';
-// Import API
 import DoctorsAPI from '../../utils/DoctorsAPI';
 import ClinicsAPI from '../../utils/ClinicsAPI';
-// Import UI components and style from material-ui-next.
 import { withStyles } from 'material-ui/styles';
 import Paper from 'material-ui/Paper';
 import Typography from 'material-ui/Typography';
 import Grid from 'material-ui/Grid';
-// Import Sidebar component.
 import Sidebar from '../../Components/Sidebar';
 
-//Style
 const styles = theme => ({
   root: theme.mixins.gutters({
     paddingTop: 16,
@@ -79,13 +69,11 @@ class DoctorList extends Component {
     clinicFormSuccessMessage: "",  
   };
 
-  // When the component mounts, load all doctors and clinics and save them to this.state.doctors and this.state.clinics.
   componentDidMount() {
     this.loadDoctors();
     this.loadClinics();
   }
 
-//for rendering doctors list 
   loadDoctors = () => {
     DoctorsAPI.getDoctors()
       .then(res =>
@@ -93,7 +81,6 @@ class DoctorList extends Component {
       .catch(err => console.log('there is an issue loading doctors: ' + err));
   };
 
-  // Loads all clinics and saves them to this.state.clinics.
   loadClinics = () => {
     ClinicsAPI.getClinics()
       .then(res =>
@@ -101,22 +88,18 @@ class DoctorList extends Component {
       .catch(err => console.log('there is an issue loading doctors: ' + err));
   };
 
-  // Deletes a doctor from the database with a given id, then reloads doctors from the db
   deleteDoctor = id => {
     DoctorsAPI.deleteDoctor(id)
       .then(res => this.loadDoctors())
       .catch(err => console.log(err));
   };
 
-  // Deletes a clinic from the database with a given id, then reloads clinics from the db
   deleteClinic = id => {
     ClinicsAPI.deleteClinic(id)
       .then(res => this.loadClinics())
       .catch(err => console.log(err));
   };
 
-  // Keep track of what user enters for doctor first name so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
   handleDoctorFirstNameChange = (event) => {
     this.setState({ 
       doctorFirstName: event.target.value,
@@ -125,8 +108,6 @@ class DoctorList extends Component {
     });
   }
 
-  // Keep track of what user enters for doctor last name so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
   handleDoctorLastNameChange = (event) => {
     this.setState({ 
       doctorLastName: event.target.value,
@@ -135,8 +116,7 @@ class DoctorList extends Component {
     });
   }
 
-  // Keep track of what user types into clinic input field so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
+
   handleDoctorClinicChange = (event) => {
     this.setState({ 
       doctorClinic: event.target.value,
@@ -145,8 +125,7 @@ class DoctorList extends Component {
     });
   }
 
-  // Keep track of what user types into phone input field so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
+
   handleDoctorPhoneChange = (event) => {
     this.setState({ 
       doctorPhone: event.target.value,
@@ -155,8 +134,6 @@ class DoctorList extends Component {
     });
   }
 
-    // Keep track of what user enters for clinic name so that input can be grabbed later.
-    // If form validation error is showing, remove error from page when user starts typing.
   handleClinicNameChange = (event) => {
     this.setState({ 
       clinicName: event.target.value,
@@ -165,8 +142,6 @@ class DoctorList extends Component {
     });
   }
 
-  // Keep track of what user enters for clinic address so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
   handleClinicAddressChange = (event) => {
     this.setState({ 
       clinicAddress: event.target.value,
@@ -175,8 +150,6 @@ class DoctorList extends Component {
     });
   }
 
-  // Keep track of what user types into clinic city field so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
   handleClinicCityChange = (event) => {
     this.setState({ 
       clinicCity: event.target.value,
@@ -185,8 +158,6 @@ class DoctorList extends Component {
     });
   }
 
-  // Keep track of what user types into clinic state field so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
   handleClinicStateChange = (event) => {
     this.setState({ 
       clinicState: event.target.value,
@@ -195,8 +166,6 @@ class DoctorList extends Component {
     });
   }
 
-   // Keep track of what user types into zip code field so that input can be grabbed later.
-   // If form validation error is showing, remove error from page when user starts typing.
   handleClinicZipChange = (event) => {
     this.setState({ 
       clinicZip: event.target.value,
@@ -205,8 +174,6 @@ class DoctorList extends Component {
     });
   }
 
-  // Keep track of what user types into phone input field so that input can be grabbed later.
-  // If form validation error is showing, remove error from page when user starts typing.
   handleClinicPhoneChange = (event) => {
     this.setState({ 
       clinicPhone: event.target.value,
@@ -215,32 +182,26 @@ class DoctorList extends Component {
     });
   }
 
-  // When user submits doctor form, save doctor to database.
   handleDoctorFormSubmit = event => {
     event.preventDefault();
-
-        // If doctor first name field is empty when user submits form, show error.
     if (this.state.doctorFirstName === "") {
       this.setState({
         doctorFirstNameError: "First name is required."
       })
     }
 
-    // If the doctor last name field is empty when user submits form, show error.
     if (this.state.doctorLastName === "") {
       this.setState({
         doctorLastNameError: "Last name is required."
       })
     }
 
-    // if the select clinic field is empty when user submits form, show error.
     if (this.state.doctorClinic === "") {
       this.setState({
         doctorClinicError: "From the drop-down list, select the primary clinic that the doctor is associated with."
       })
     }
 
-    // if the doctor phone number field is empty when user submits form, show error.
     if (this.state.doctorPhone === "") {
       this.setState({
         doctorPhoneError: "Phone number is required."
@@ -248,8 +209,6 @@ class DoctorList extends Component {
     }
 
     else {
-      //Save doctor to database if all fields are filled out.s
-      // Show form success message to user.
       DoctorsAPI.saveDoctor({
         firstname: this.state.doctorFirstName,
         lastname: this.state.doctorLastName,
@@ -263,51 +222,43 @@ class DoctorList extends Component {
           doctorFormSuccessMessage: `Dr. ${this.state.doctorFirstName} ${this.state.doctorLastName} added successfully!`,
       });
 
-      // Clear form
       document.getElementById('doctor-form').reset();
     }
   };
 
-  // When user submits clinic form, save clinic to database.
   handleClinicFormSubmit = event => {
     event.preventDefault();
 
-    // If clinic name field is empty when user submits form, show error.
     if (this.state.clinicName === "") {
       this.setState({
         clinicNameError: "Name is required."
       })
     }
 
-    // If the clinic address field is empty when user submits form, show error.
     if (this.state.clinicAddress === "") {
       this.setState({
         clinicAddressError: "Address is required."
       })
     }
 
-    // if the clinic city field is empty when user submits form, show error.
     if (this.state.clinicCity === "") {
       this.setState({
         clinicCityError: "City is required."
       })
     }
 
-    // if the clinic state field is empty when user submits form, show error.
     if (this.state.clinicState === "") {
       this.setState({
         clinicStateError: "State is required."
       })
     }
 
-    // if the clinic zip code field is empty when user submits form, show error.
     if (this.state.clinicZip === "") {
       this.setState({
         clinicZipError: "Zip code is required."
       })
     }
 
-    // if the clinic phone number field is empty when user submits form, show error.
     if (this.state.clinicPhone === "") {
       this.setState({
         clinicPhoneError: "Phone number is required."
@@ -315,8 +266,6 @@ class DoctorList extends Component {
     }
 
     else {
-      // Save clinic to database if all fields are filled out.
-      // Show form success message to user.
       ClinicsAPI.saveClinic({
         clinicname: this.state.clinicName,
         address: this.state.clinicAddress,
@@ -332,7 +281,6 @@ class DoctorList extends Component {
           clinicFormSuccessMessage: `${this.state.clinicName} added successfully!`,
       });
 
-      // Clear form
       document.getElementById('clinic-form').reset();
     }
   };
@@ -443,6 +391,4 @@ class DoctorList extends Component {
   }
 }
 
-// Exporting the DoctorList component so that the App.js file
-// can use/render the My Doctor List page.
 export default withStyles(styles)(DoctorList);
