@@ -1,6 +1,4 @@
-// required packages
 const oauth2orize = require('oauth2orize');
-//may need to add uid-safe to other oath files
 const uid = require('uid-safe');
 const User = require('../models/User');
 const Client = require('../models/Client');

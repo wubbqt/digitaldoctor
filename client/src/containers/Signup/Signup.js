@@ -152,6 +152,4 @@ class Signup extends Component {
   }
 }
 
-// Exporting the Login component
-// so that the App.js file can render the Signup page.
 export default withRouter(withStyles(styles)(Signup));
