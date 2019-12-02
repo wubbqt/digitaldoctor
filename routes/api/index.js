@@ -1,16 +1,57 @@
-const router = require('espress').Router();
-const path = require('path');
-const Auth = require('./api/Auth');
-const apiRoutes = require('./api');
+const router = require('express').Router();
+const symptomRoutes = require('./symptoms');
+const appointmentRoutes = require('./appointments');
+const doctorRoutes = require('./doctors');
+const clinicRoutes = require('./clinics');
+const logRoutes = require('./logs');
+const prescriptionRoutes = require('./prescriptions');
 
+module.exports = function(passport){
+    // Symptoms 
+    router.use('/symptoms', symptomRoutes());
 
-module.exports = function(passport, User) {
+    // Appointments
+    router.use('/appointments', appointmentRoutes());
 
-    router.use('./api', apiRoutes(passport));
-    router.use('Auth', Auth(passport, User));
+    // Doctors
+    router.use('/doctors', doctorRoutes());
 
-    router.use((req, res) => {
-        res.sendFile(path.join(__dirname, '../client/build/index.html'));
-    });
-    return router
+    // Logs
+    router.use('/logs', logRoutes());
+
+    // Clinics
+    router.use('/clinics', clinicRoutes());
+
+    // Prescriptions
+    router.use('/prescriptions', prescriptionRoutes());
+
+    return router;
 }
+
+// const router = require('express').Router();
+// const symptomRoutes = require('./symptoms');
+// const appointmentRoutes = require('./appointments');
+// const doctorRoutes = require('./doctors');
+// const clinicRoutes = require('./clinics');
+// const logRoutes = require('./logs');
+// const prescriptionRoutes = require('./prescriptions');
+
+// // Symptoms 
+// router.use('/symptoms', symptomRoutes);
+
+// // Appointments
+// router.use('/appointments', appointmentRoutes);
+
+// // Doctors
+// router.use('/doctors', doctorRoutes);
+
+// // Logs
+// router.use('/logs', logRoutes);
+
+// // Clinics
+// router.use('/clinics', clinicRoutes);
+
+// // Prescriptions
+// router.use('/prescriptions', prescriptionRoutes);
+
+// module.exports = router;
